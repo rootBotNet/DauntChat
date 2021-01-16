@@ -1,8 +1,5 @@
 package za.co.dauntless.dauntchat;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -10,6 +7,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -24,13 +24,12 @@ import java.util.HashMap;
 public class RegisterActivity extends AppCompatActivity {
 
     //Widgets.
-    EditText userET, emailET, passET;
+    EditText username, email, password;
     Button registerBtn;
 
     //Firebase
     FirebaseAuth firebaseAuth;
     DatabaseReference databaseReference;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,10 +39,10 @@ public class RegisterActivity extends AppCompatActivity {
         //Initialize Widgets
         //Get information from view.
         //Set view information to Widgets.
-        userET = findViewById(R.id.username);
-        emailET = findViewById(R.id.email);
-        passET = findViewById(R.id.password);
-        registerBtn = findViewById(R.id.registerButton);
+        username = findViewById(R.id.usernameSignUp);
+        email = findViewById(R.id.emailSignUp);
+        password = findViewById(R.id.passwordSignUp);
+        registerBtn = findViewById(R.id.signUpButtonSignUp);
 
         //Firebase Auth
         firebaseAuth = FirebaseAuth.getInstance();
@@ -52,31 +51,26 @@ public class RegisterActivity extends AppCompatActivity {
         registerBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String usernameText = userET.getText().toString();
-                String emailText = emailET.getText().toString();
-                String passwordText = passET.getText().toString();
+                String usernameText = username.getText().toString();
+                String emailText = email.getText().toString();
+                String passwordText = password.getText().toString();
 
-                if(TextUtils.isEmpty(usernameText) || TextUtils.isEmpty(emailText) || TextUtils.isEmpty(passwordText)){
+                if (TextUtils.isEmpty(usernameText) || TextUtils.isEmpty(emailText) || TextUtils.isEmpty(passwordText)) {
                     Toast.makeText(RegisterActivity.this, "Please Fill All Fields", Toast.LENGTH_SHORT).show();
-                } else{
+                } else {
                     registerUser(usernameText, emailText, passwordText);
                 }
-
             }
         });
-
-
     }
 
-    private void registerUser(final String username, String email, String password){
-
+    private void registerUser(final String username, String email, String password) {
         firebaseAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
 
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
-
-                        if(task.isSuccessful()){
+                        if (task.isSuccessful()) {
                             FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
                             String userId = firebaseUser.getUid();
 
@@ -95,26 +89,17 @@ public class RegisterActivity extends AppCompatActivity {
 
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
-
-                                    if(task.isSuccessful()){
+                                    if (task.isSuccessful()) {
                                         Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
-                                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                                         startActivity(intent);
                                         finish();
                                     }
-
                                 }
-
                             });
-
-                        } else{
+                        } else {
                             Toast.makeText(RegisterActivity.this, "Invalid Email or Password", Toast.LENGTH_SHORT).show();
                         }
-
                     }
-
                 });
-
     }
-
 }
