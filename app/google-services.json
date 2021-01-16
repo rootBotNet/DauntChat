@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "169760595082",
+    "project_id": "dauntchat-9889c",
+    "storage_bucket": "dauntchat-9889c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:169760595082:android:7a586a7cc153e16f636173",
+        "android_client_info": {
+          "package_name": "za.co.dauntless.dauntchat"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "169760595082-tq3f8u9uhlqp1l7m13fvdppiej152i0j.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB6TfSbtEMhMbnRdzqI2tzWN2Xxt_o9i7w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "169760595082-tq3f8u9uhlqp1l7m13fvdppiej152i0j.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
